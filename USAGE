@@ -4,7 +4,7 @@ It does not search directories recursively (for a reason).
 The new file names will be created like this: prefix + number + extension
 Options:
 	-f extension -> filter the files with this extension (for existing filenames) [default is all files]
-		 multiple extensions might be used like that: -f ext1 -f ext2 ...
+		 multiple extensions might be used like that: -f .ext1 -f .ext2 ...
 	-e extension -> change extension of new filenames (format is .ext) [default is .jpg]
 	-p prefix -> prefix of new filenames [default is "image_"]
 	-c number -> start counting from this number (for new filenames) [default is 1]
