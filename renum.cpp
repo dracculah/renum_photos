@@ -75,7 +75,7 @@ void printUsage()
 	printf("The new file names will be created like this: prefix + number + extension\n");
 	printf("Options:\n");
 	printf("\t-f extension -> filter the files with this extension (for existing filenames) [default is all files]\n");
-	printf("\t\t multiple extensions might be used like that: -f ext1 -f ext2 ...\n");
+	printf("\t\t multiple extensions might be used like that: -f .ext1 -f .ext2 ...\n");
 	printf("\t-e extension -> change extension of new filenames (format is .ext) [default is .jpg]\n");
 	printf("\t-p prefix -> prefix of new filenames [default is \"image_\"]\n");
 	printf("\t-c number -> start counting from this number (for new filenames) [default is 1]\n");
