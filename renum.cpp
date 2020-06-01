@@ -79,7 +79,7 @@ void printUsage()
 	printf("\t-e extension -> change extension of new filenames (format is .ext) [default is .jpg]\n");
 	printf("\t-p prefix -> prefix of new filenames [default is \"image_\"]\n");
 	printf("\t-c number -> start counting from this number (for new filenames) [default is 1]\n");
-	printf("\t-d -> do it. PLEASE make ABSOLUTELY sure you know what you're doing before using this [without -d -> it is pretend mode]\n");
+	printf("\t-d -> do it. PLEASE make ABSOLUTELY sure you know what you're doing [without -d -> it is pretend mode]\n");
 	printf("\t\t please note that -d does unrevertable changes, please make sure you have run this exact setup\n");
 	printf("\t\t without -d before and you are happy with the outcome and accept the risks.\n");
 	printf("\t\t The program does not check about overlapping filenames in any manner -> DATA LOSS might happen!\n");
@@ -152,6 +152,8 @@ int main(int argc, char** argv)
 	const char* p_p = "-p";
 	const char* p_c = "-c";
 	const char* p_d = "-d";
+	const char* p_help1 = "-h";
+	const char* p_help2 = "--help";
 	//
 	if (argc == 1)
 	{
@@ -160,6 +162,11 @@ int main(int argc, char** argv)
 	}
 	if (argc > 1)
 	{	
+		if ((!memcmp(argv[1], p_help1, strlen(p_help1))) || (!memcmp(argv[1], p_help2, strlen(p_help2))))
+		{
+			printUsage();
+			return 0;
+		}
 		s_dir = argv[1];
 		if ((s_dir == ".") || (s_dir == "./"))
 		{
