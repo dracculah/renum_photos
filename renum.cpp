@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
+#include <sys/stat.h>
+
 
 using namespace std;
 
@@ -32,6 +35,24 @@ string ExtractFileExt(string str)
 	return str.substr(last,str.length()-last);
 }
 
+// credits an:
+// https://bbs.archlinux.org/viewtopic.php?id=97216
+// Author:    Dainis Dauners ( SwedBo [ e-creative@inbox.lv ] @ archlinux.org )
+// Date:      02.05.2010
+// and
+// https://stackoverflow.com/questions/4980815/c-determining-if-directory-not-a-file-exists-in-linux
+// for the flag S_IFDIR
+bool isDir(std::string dir)
+{
+    struct stat fileInfo;
+    stat(dir.c_str(), &fileInfo);
+    if (fileInfo.st_mode & S_IFDIR) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 int getdir (string dir, list<string> &files, vector<string> filter)
 {
     DIR *dp;
@@ -46,18 +67,21 @@ int getdir (string dir, list<string> &files, vector<string> filter)
     while ((dirp = readdir(dp)) != NULL) {
 		if (dirp->d_name[0] != '.')
 		{
-			if (filter.size() == 0)
-				files.push_back(string(dirp->d_name));
-			else
+			if (!isDir(dirp->d_name)) // take only files, don't include directories
 			{
-				string fn = string(dirp->d_name);
-				for (vector<string>::iterator it=filter.begin();it!=filter.end();it++)
+				if (filter.size() == 0)
+					files.push_back(string(dirp->d_name));
+				else
 				{
-					string _ext = *it;
-					if (ExtractFileExt(fn) == _ext)
+					string fn = string(dirp->d_name);
+					for (vector<string>::iterator it=filter.begin();it!=filter.end();it++)
 					{
-						files.push_back(fn);
-						break; // avoid adding the same file twice accidentally (would happen if you do -f twice with the same ext)
+						string _ext = *it;
+						if (ExtractFileExt(fn) == _ext)
+						{
+							files.push_back(fn);
+							break; // avoid adding the same file twice accidentally (would happen if you do -f twice with the same ext)
+						}
 					}
 				}
 			}
