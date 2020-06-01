@@ -1,0 +1,2 @@
+# run "chmod +x compile" do make it 'executable', then run ./compile
+g++ renum.cpp -o renum
