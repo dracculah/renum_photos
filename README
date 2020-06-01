@@ -1,5 +1,22 @@
+== Renumbering the filenames of photos for creating timelapses with ffmpeg ==
+
 This is a very very simple tool for a specific task. It will fail in many situations. It does not work with unicode filenames.
 
-IMPORTANT: DATA LOSS might happen, use only if you have a backup!
+IMPORTANT: DATA LOSS might happen, use only if you HAVE a BACKUP!
 
 Take it AS IS without any warranty!
+
+How it works:
+
+it searches for files within given directory. If no filter is given it will take all files. It does not search directories
+recursively though! The files will be sorted alphabetically and then numbered by this scheme: prefix + number + extension.
+
+Once it is done you can run something like: ffmpeg -f image2 -i image_%06d.jpg -r 24 -q:v 2 timelapse.avi
+
+What you need to consider:
+
+* Make sure ALL current file names sort alphabetically in increasing order
+* It will not detect if your camera overflew the numbering:
+    something like DSC_9998.JPG DSC_9999.JPG DSC_0000.JPG ... -> it will NOT detect that!
+    you'd need to create a new directory and put all files upto DSC_9999.JPG, then renum them, then
+    put all the rest files into a new directory and renum them with -c option
