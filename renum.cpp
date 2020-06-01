@@ -162,6 +162,14 @@ void doRenum(string _dir, vector<string> filter, const char *prefix = NULL, cons
 	}
 }
 
+// if two char* "string"s are equal in value
+bool twoStrEqual(const char* s1, const char* s2)
+{
+	if (strlen(s1) != strlen(s2))
+		return false;
+	return (!memcmp(s1, s2, strlen(s2)));
+}
+
 int main(int argc, char** argv)
 {
 	string s_dir;
@@ -186,7 +194,7 @@ int main(int argc, char** argv)
 	}
 	if (argc > 1)
 	{	
-		if ((!memcmp(argv[1], p_help1, strlen(p_help1))) || (!memcmp(argv[1], p_help2, strlen(p_help2))))
+		if ((twoStrEqual(argv[1], p_help1)) || (twoStrEqual(argv[1], p_help2)))
 		{
 			printUsage();
 			return 0;
@@ -202,7 +210,7 @@ int main(int argc, char** argv)
 		int i = 2;
 		while (i < argc)
 		{
-			if (!memcmp(argv[i], p_f, strlen(p_f)))
+			if (twoStrEqual(argv[i], p_f))
 			{
 				if (argc == i+1)
 				{
@@ -212,7 +220,7 @@ int main(int argc, char** argv)
 				string s_filter = argv[i+1];
 				v_filter.push_back(s_filter);
 			}
-			if (!memcmp(argv[i], p_e, strlen(p_e)))
+			if (twoStrEqual(argv[i], p_e))
 			{
 				if (argc == i+1)
 				{
@@ -221,7 +229,7 @@ int main(int argc, char** argv)
 				}
 				c_ext = argv[i+1];
 			}
-			if (!memcmp(argv[i], p_p, strlen(p_p)))
+			if (twoStrEqual(argv[i], p_p))
 			{
 				if (argc == i+1)
 				{
@@ -230,7 +238,7 @@ int main(int argc, char** argv)
 				}
 				c_prefix = argv[i+1];
 			}
-			if (!memcmp(argv[i], p_c, strlen(p_c)))
+			if (twoStrEqual(argv[i], p_c))
 			{
 				if (argc == i+1)
 				{
@@ -240,7 +248,7 @@ int main(int argc, char** argv)
 				char *c_num = argv[i+1];
 				start_from = atoi(c_num);
 			}
-			if (!memcmp(argv[i], p_d, strlen(p_d)))
+			if (twoStrEqual(argv[i], p_d))
 				do_it = true;
 			i+=2;
 		}
