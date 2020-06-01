@@ -8,7 +8,7 @@ Options:
 	-e extension -> change extension of new filenames (format is .ext) [default is .jpg]
 	-p prefix -> prefix of new filenames [default is "image_"]
 	-c number -> start counting from this number (for new filenames) [default is 1]
-	-d -> do it. PLEASE make ABSOLUTELY sure you know what you're doing before using this [without -d -> it is pretend mode]
+	-d -> do it. PLEASE make ABSOLUTELY sure you know what you're doing [without -d -> it is pretend mode]
 		 please note that -d does unrevertable changes, please make sure you have run this exact setup
 		 without -d before and you are happy with the outcome and accept the risks.
 		 The program does not check about overlapping filenames in any manner -> DATA LOSS might happen!
